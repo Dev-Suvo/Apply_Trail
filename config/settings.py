@@ -31,8 +31,6 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # SECURITY 
 
-# SECRET_KEY = ''
-
 SECRET_KEY = env('SECRET_KEY')
 
 
