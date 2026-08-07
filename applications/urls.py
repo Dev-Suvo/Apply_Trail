@@ -1,10 +1,9 @@
 from django.contrib import admin
 from django.urls import path
-from .views import application_list, application_updation
+from .views import jobApllication, Jobapllications
 
 
 urlpatterns = [
-    path("applications/", application_list, name='application_list'),
-    path("applications/<int:pk>", application_updation, name='application_updation'),
-
+    path("applications/", jobApllication.as_view(), name='jobApllication'),
+    path("applications/<int:pk>", Jobapllications.as_view(), name='jobApllication'),
 ]
