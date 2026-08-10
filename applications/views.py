@@ -4,53 +4,13 @@ from .serializers import Applicationserializers
 from .models import Application
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.decorators import api_view
 
 from rest_framework .views import APIView
 
 
-class jobApllication(APIView):
-    def get(self, request):
-        apllications = Application.objects.all()
-        serializer = Applicationserializers(apllications, many=True)
-        return Response(serializer.data,status=status.HTTP_200_OK)
+from rest_framework .viewsets import ModelViewSet
 
+class JobApplication(ModelViewSet):
+    queryset = Application.objects.all()
+    serializer_class = Applicationserializers
 
-    def post(self, request):
-        serializer = Applicationserializers(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-class Jobapllications(APIView):
-    def patch(self, request,pk):
-            try:
-                application = Application.objects.get(id = pk)
-            
-            except Application.DoesNotExist:
-                return Response({'error': 'Application not found'}, status=status.HTTP_404_NOT_FOUND)  
-            
-                      
-            serializer = Applicationserializers(application,data = request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status= status.HTTP_202_ACCEPTED)
-            return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
-            
-    
-    
-    def delete(self, request, pk):
-        try:
-            application = Application.objects.get(id=pk)
-    
-        except Application.DoesNotExist:
-            return Response({"error": "Application not found"},status=status.HTTP_404_NOT_FOUND)
-        
-        application.delete()
-        return Response({"message": "Application deleted successfully"},status=status.HTTP_204_NO_CONTENT)
-    
-    
-        
