@@ -23,9 +23,11 @@ class Application(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='applied')
     applied_date = models.DateField()
     notes = models.TextField(blank=True, null=True)
-    tags = models.ManyToManyField(Tag, blank=True, related_name='applications')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    tags = models.ManyToManyField(Tag, blank=True, related_name='applications')
+
+
 
 
     def __str__(self):
