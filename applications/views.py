@@ -12,3 +12,6 @@ class JobApplication(ModelViewSet):
     queryset = Application.objects.all()
     serializer_class = Applicationserializers
 
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)
+

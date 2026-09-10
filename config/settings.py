@@ -134,8 +134,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 
-REST_FRAMEWORK ={
-    'DEFAULT_AUTHENTICATION_CLASSSES':(
-        'rest_framework_simplejwt.authetication.JWTAuthentication',
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
